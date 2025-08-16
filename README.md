@@ -1,16 +1,18 @@
-# flutter_posts
+# 📱 flutter_posts
 
-A new Flutter project.
+## 📖 Project Description
+This project is built with **Flutter** following **Clean Architecture** principles to ensure scalability, maintainability, and a clear separation of concerns.
 
-## Getting Started
+## 🏗️ Key Features of the Architecture
+- **Clean Architecture**
+    - Divided into `domain`, `data`, and `presentation` layers.
+    - Improves testability and keeps business logic independent from frameworks.
 
-This project is a starting point for a Flutter application.
+- **State Management**
+    - **BLoC** → used for complex, event-driven flows.
+    - **GetX** → used for lightweight state management and dependency injection.
+    - Each state management implementation is organized in a **separate Git branch** for clarity and experimentation.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Data Handling**
+    - **REST API integration** for remote data communication.
+    - **Local Storage** for caching and offline support.

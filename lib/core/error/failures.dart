@@ -7,12 +7,12 @@ class OfflineFailure extends Failure {
   List<Object?> get props => [];
 }
 
-class ServerFailure extends Failure{
+class ServerFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
 
-class EmptyCacheFailure extends Failure{
+class EmptyCacheFailure extends Failure {
   @override
   List<Object?> get props => [];
 }

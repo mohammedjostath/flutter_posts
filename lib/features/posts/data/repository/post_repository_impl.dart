@@ -1,13 +1,15 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_posts/core/error/exceptions.dart';
-import 'package:flutter_posts/core/internet_checker/network_info.dart';
-import 'package:flutter_posts/features/posts/data/model/post_model.dart';
+import '../../../../../core/error/exceptions.dart';
+import '../../../../../core/internet_checker/network_info.dart';
+import '../../../../../features/posts/data/model/post_model.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../features/posts/domain/entities/post.dart';
 import '../../../../../features/posts/domain/repository/posts_repository.dart';
 
 import '../datasource/post_local_data_source.dart';
 import '../datasource/post_remote_data_source.dart';
+
+typedef DeleteOrUpdateOrAddPost = Future<Unit> Function();
 
 class PostRepositoryImpl implements PostsRepository {
   final PostRemoteDataSource remoteDataSource;
@@ -76,8 +78,7 @@ class PostRepositoryImpl implements PostsRepository {
   }
 
   Future<Either<Failure, Unit>> _getMessage(
-    Future<Unit> Function() deleteOrUpdateOrAddPost,
-    // DeleteOrUpdateOrAddPost deleteOrUpdateOrAddPost,
+      DeleteOrUpdateOrAddPost deleteOrUpdateOrAddPost,
   ) async {
     if (await networkInfo.isConnected) {
       try {

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_posts/features/posts/domain/repository/posts_repository.dart';
-
+import '../../../../../features/posts/domain/repository/posts_repository.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/post.dart';
 

@@ -9,7 +9,6 @@ import '../../../../../../../features/posts/domain/usecase/delete_post.dart';
 import '../../../../../../../features/posts/domain/usecase/update_post.dart';
 
 part 'add_update_delete_post_event.dart';
-
 part 'add_update_delete_post_state.dart';
 
 class AddUpdateDeletePostBloc
@@ -18,11 +17,11 @@ class AddUpdateDeletePostBloc
   final DeletePostUseCase deletePost;
   final UpdatePostUseCase updatePost;
 
-  AddUpdateDeletePostBloc({
-    required this.addPost,
-    required this.deletePost,
-    required this.updatePost,
-  }) : super(AddUpdateDeletePostInitial()) {
+  AddUpdateDeletePostBloc(
+     this.addPost,
+     this.deletePost,
+     this.updatePost,
+   ) : super(AddUpdateDeletePostInitial()) {
     on<AddUpdateDeletePostEvent>((event, emit) async {
       if (event is AddPostEvent) {
         emit(Loading());

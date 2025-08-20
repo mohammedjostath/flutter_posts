@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_posts/features/posts/domain/entities/post.dart';
-import 'package:flutter_posts/features/posts/domain/usecase/get_post.dart';
+import 'package:flutter_posts/features/posts/domain/usecase/get_all_posts.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/error/failures.dart';
@@ -13,7 +13,7 @@ part 'posts_state.dart';
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  PostsBloc({required this.getAllPostsUseCase}) : super(PostsInitial()) {
+  PostsBloc(  this.getAllPostsUseCase ) : super(PostsInitial()) {
     on<PostsEvent>((event, emit) async {
       if (event is GetAllPostsEvent || event is RefreshPostsEvent) {
         emit(LoadingPostsState());

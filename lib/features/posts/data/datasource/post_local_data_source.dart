@@ -6,6 +6,7 @@ import '../model/post_model.dart';
 
 abstract class PostLocalDataSource {
   Future<List<PostModel>> getCachedPosts();
+
   Future<Unit> cachePosts(List<PostModel> postModels);
 }
 
@@ -14,7 +15,8 @@ const CACHED_POSTS = "CACHED_POSTS";
 class PostLocalDataSourceImpl implements PostLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  PostLocalDataSourceImpl({required this.sharedPreferences});
+  PostLocalDataSourceImpl(this.sharedPreferences);
+
   @override
   Future<Unit> cachePosts(List<PostModel> postModels) {
     List postModelsToJson = postModels

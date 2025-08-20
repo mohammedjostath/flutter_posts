@@ -19,7 +19,7 @@ const BASE_URL = "https://jsonplaceholder.typicode.com";
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
   final http.Client client;
 
-  PostRemoteDataSourceImpl({required this.client});
+  PostRemoteDataSourceImpl(this.client);
 
   @override
   Future<List<PostModel>> getAllPosts() async {
@@ -59,7 +59,6 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
 
   @override
   Future<Unit> deletePost(int id) async {
-
     final response = await client.delete(
       Uri.parse("$BASE_URL/posts/$id"),
       headers: {"Content-Type": "application/json"},
@@ -75,10 +74,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
   @override
   Future<Unit> updatePost(PostModel postModel) async {
     final postId = postModel.id.toString();
-    final body = {
-      "title": postModel.title,
-      "body": postModel.body,
-    };
+    final body = {"title": postModel.title, "body": postModel.body};
 
     final response = await client.patch(
       Uri.parse("$BASE_URL/posts/$postId"),

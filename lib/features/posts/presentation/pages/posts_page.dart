@@ -4,11 +4,25 @@ import 'package:flutter_posts/core/widgets/loading_widget.dart';
 import 'package:flutter_posts/features/posts/presentation/bloc/posts/posts_bloc.dart';
 import 'package:flutter_posts/features/posts/presentation/pages/post_add_update_page.dart';
 import 'package:flutter_posts/features/posts/presentation/widgets/posts_page/post_list_widget.dart';
-
 import '../widgets/posts_page/message_display_widget.dart';
+import 'package:flutter_posts/injection_container.dart' as di;
+
 
 class PostsPage extends StatelessWidget {
   const PostsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => di.sl<PostsBloc>()..add(GetAllPostsEvent()),
+      child: const PostsView(),
+    );
+  }
+}
+
+
+class PostsView extends StatelessWidget {
+  const PostsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +40,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10), // ✅ correct
+      padding: const EdgeInsets.all(10),
       child: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
           if (state is LoadingPostsState) {

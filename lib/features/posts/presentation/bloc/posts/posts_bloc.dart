@@ -13,7 +13,7 @@ part 'posts_state.dart';
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final GetAllPostsUseCase getAllPostsUseCase;
 
-  PostsBloc(  this.getAllPostsUseCase ) : super(PostsInitial()) {
+  PostsBloc(this.getAllPostsUseCase) : super(PostsInitial()) {
     on<PostsEvent>((event, emit) async {
       if (event is GetAllPostsEvent || event is RefreshPostsEvent) {
         emit(LoadingPostsState());

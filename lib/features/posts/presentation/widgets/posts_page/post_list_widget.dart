@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_posts/core/routes/routes.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../domain/entities/post.dart';
-import '../../pages/post_details_page.dart';
 
 class PostListWidget extends StatelessWidget {
   final List<Post> posts;
@@ -22,12 +23,7 @@ class PostListWidget extends StatelessWidget {
           subtitle: Text(posts[index].body, style: TextStyle(fontSize: 16)),
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => PostDetailPage(post: posts[index]),
-              ),
-            );
+            context.push(Routes.postDetailsPage, extra: posts[index]);
           },
         );
       },

@@ -11,18 +11,19 @@ import 'package:flutter_posts/features/posts/domain/usecase/update_post.dart';
 import 'package:flutter_posts/features/posts/presentation/bloc/add_update_delete_post/add_update_delete_post_bloc.dart';
 import 'package:flutter_posts/features/posts/presentation/bloc/posts/posts_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'features/posts/domain/repository/posts_repository.dart';
 import 'features/posts/domain/usecase/add_post.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  initCoreModule();
-  initExternalDependenciesModule();
-  initPostsBlocModule();
+  await initCoreModule();
+  await initExternalDependenciesModule();
+  await initPostsBlocModule();
 }
 
 initCoreModule() {
-  GetIt.I.registerLazySingleton(() => NetworkInfoImpl(sl()));
+  GetIt.I.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 }
 
 initExternalDependenciesModule() async {
@@ -46,9 +47,19 @@ initPostsBlocModule() {
   GetIt.I.registerLazySingleton(() => UpdatePostUseCase(sl()));
 
   // Repository
-  GetIt.I.registerLazySingleton(() => PostRepositoryImpl(sl(), sl(), sl()));
+  sl.registerLazySingleton<PostsRepository>(
+    () => PostRepositoryImpl(
+      remoteDataSource: sl(),
+      localDataSource: sl(),
+      networkInfo: sl(),
+    ),
+  );
 
   // Datasource
-  GetIt.I.registerLazySingleton(() => PostRemoteDataSourceImpl(sl()));
-  GetIt.I.registerLazySingleton(() => PostLocalDataSourceImpl(sl()));
+  sl.registerLazySingleton<PostRemoteDataSource>(
+    () => PostRemoteDataSourceImpl(client: sl()),
+  );
+  sl.registerLazySingleton<PostLocalDataSource>(
+    () => PostLocalDataSourceImpl(sharedPreferences: sl()),
+  );
 }

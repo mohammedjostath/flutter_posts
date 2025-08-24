@@ -15,7 +15,7 @@ const CACHED_POSTS = "CACHED_POSTS";
 class PostLocalDataSourceImpl implements PostLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  PostLocalDataSourceImpl(this.sharedPreferences);
+  PostLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
   Future<Unit> cachePosts(List<PostModel> postModels) {

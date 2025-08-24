@@ -19,14 +19,18 @@ const BASE_URL = "https://jsonplaceholder.typicode.com";
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
   final http.Client client;
 
-  PostRemoteDataSourceImpl(this.client);
+  PostRemoteDataSourceImpl({required this.client});
 
   @override
   Future<List<PostModel>> getAllPosts() async {
+    print("$BASE_URL/posts/");
     final response = await client.get(
       Uri.parse("$BASE_URL/posts/"),
       headers: {"Content-Type": "application/json"},
     );
+
+    print(response.statusCode);
+    print(response.body);
 
     if (response.statusCode == 200) {
       final List decodedJson = json.decode(response.body) as List;

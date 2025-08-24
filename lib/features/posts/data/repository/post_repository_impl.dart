@@ -16,11 +16,11 @@ class PostRepositoryImpl implements PostsRepository {
   final PostLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  PostRepositoryImpl(
-    this.remoteDataSource,
-    this.localDataSource,
-    this.networkInfo,
-  );
+  PostRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+    required this.networkInfo,
+  });
 
   @override
   Future<Either<Failure, List<Post>>> getAllPosts() async {
@@ -78,7 +78,7 @@ class PostRepositoryImpl implements PostsRepository {
   }
 
   Future<Either<Failure, Unit>> _getMessage(
-      DeleteOrUpdateOrAddPost deleteOrUpdateOrAddPost,
+    DeleteOrUpdateOrAddPost deleteOrUpdateOrAddPost,
   ) async {
     if (await networkInfo.isConnected) {
       try {

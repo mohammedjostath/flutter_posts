@@ -8,7 +8,7 @@ sealed class AddUpdateDeletePostState extends Equatable {
 
 final class AddUpdateDeletePostInitial extends AddUpdateDeletePostState {}
 
-class Loading extends AddUpdateDeletePostState {}
+class LoadingAddDeleteUpdatePostState extends AddUpdateDeletePostState {}
 
 class ErrorAddDeleteUpdatePostState extends AddUpdateDeletePostState {
   final String message;

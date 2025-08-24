@@ -24,7 +24,7 @@ class AddUpdateDeletePostBloc
    ) : super(AddUpdateDeletePostInitial()) {
     on<AddUpdateDeletePostEvent>((event, emit) async {
       if (event is AddPostEvent) {
-        emit(Loading());
+        emit(LoadingAddDeleteUpdatePostState());
         Either<Failure, Unit> successOrFailure = await addPost.execute(
           event.post,
         );
@@ -35,7 +35,7 @@ class AddUpdateDeletePostBloc
         );
 
       } else if (event is UpdatePostEvent) {
-        emit(Loading());
+        emit(LoadingAddDeleteUpdatePostState());
         Either<Failure, Unit> successOrFailure = await updatePost.execute(
           event.post,
         );
@@ -46,7 +46,7 @@ class AddUpdateDeletePostBloc
         );
 
       } else if (event is DeletePostEvent) {
-        emit(Loading());
+        emit(LoadingAddDeleteUpdatePostState());
         Either<Failure, Unit> successOrFailure = await deletePost.execute(
           event.id,
         );
